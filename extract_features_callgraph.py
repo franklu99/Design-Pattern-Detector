@@ -11,6 +11,7 @@ import os
 import plyj.model as m
 import logging
 import subprocess
+import sys, traceback
 from re import finditer
 from call_graph import *
 
