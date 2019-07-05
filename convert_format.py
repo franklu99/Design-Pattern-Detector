@@ -27,7 +27,7 @@ def convert_format(inDir, data):
     
     vectors = []
     labels = []
-    optr = open(os.path.join(inDir, "output.txt"), "w")
+    # optr = open(os.path.join(inDir, "output.txt"), "w")  # not required at this stage
     for c, f in data:
         feats = []
 
@@ -52,8 +52,8 @@ def convert_format(inDir, data):
 
         vectors.append(list(set(feats)))
         labels.append(int(print_line[:2]))
-        optr.write(print_line +'\n')
-    optr.close()
+        # optr.write(print_line +'\n')
+    # optr.close()
     print('oov feat: ', oov_feat) 
     print('total feat: ', feat_count)
     # Randomized labels until we won't find way to label items
