@@ -119,13 +119,15 @@ if __name__ == '__main__':
    if not isinstance(numeric_level, int):
        ValueError('Invalid log level %s' 
                       % options.log)
-   logging.basicConfig(level=numeric_level)
+
+   logging.basicConfig(level=numeric_level, filename='detector.log', filemode='a', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+   logger = logging.getLogger(__name__)
 
    #verify input and output
    if not os.path.isdir(options.input):
       IOError('Invalid input folder %s' 
            % options.input)
-   logging.info('Input: %s' % options.input)
+   logger.info('Input: %s' % options.input)
 
    check_dir(options.output)                             # Checks if output folder exists: if not, creates one 
    check_dir(os.path.join(options.output, "data"))       # Checks if 'data' folder exists in output folder: if not, creates one
@@ -133,7 +135,7 @@ if __name__ == '__main__':
    feat_output = os.path.join(options.output, "features")
    options.output = os.path.join(options.output, "data")
 
-   logging.info('Output: %s' % options.output)
+   logger.info('Output: %s' % options.output)
 
    #Configure input and output subdirectory patterns
    #these patterns would be used to find input, 

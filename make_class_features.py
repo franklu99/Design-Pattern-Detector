@@ -12,11 +12,10 @@ from tqdm import tqdm
 
 NDIM = 64                 ## Reconsider this value
 verbose_root = sys.argv[1]
-log.basicConfig(level=log.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+log.basicConfig(level=log.DEBUG, filename='make_class_features.log', filemode='a', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = log.getLogger(__name__)
 
-
-
-log.info("parsing projects")
+logger.info("parsing projects")
 sentences = []
 patterns = dict()
 data_file = "output-refined.csv"
@@ -33,7 +32,7 @@ file_data_store = dict()
 for root, dirs, files in os.walk(verbose_root):
     # If the are no files in the verbose root folder
     if files is None:
-        log.error("No files found in input directory")
+        logger.error("No files found in input directory")
         exit()
     for f in files:
         if ".verbose" in f:
@@ -45,7 +44,7 @@ for root, dirs, files in os.walk(verbose_root):
             class_properties = get_classes_properties(os.path.join(root, f))
 
             if class_dict is None:
-                log.warning("No classes or ngrams extracted from project file {0}".format(f))
+                logger.warning("No classes or ngrams extracted from project file {0}".format(f))
                 continue
             file_data_store[f]["class_dict"] = class_dict
             file_data_store[f]["class_properties"] = class_properties
@@ -57,7 +56,7 @@ for root, dirs, files in os.walk(verbose_root):
 
 
 
-log.info("Building Word2Vec model")
+logger.info("Building Word2Vec model")
 ## May be able to revise these paramters for better performance
 ngram_model = Word2Vec(sentences, size=NDIM, window=20, min_count=2, workers=4)
 
