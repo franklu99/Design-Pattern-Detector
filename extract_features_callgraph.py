@@ -165,7 +165,7 @@ def extract_features(inDir, outDir, parser):
     full_out.close()
 
     # Write some details about the corpus to a file
-    summary = open(os.path.join(outDir, "corpus_summary.txt"), "w")
+    summary = open(os.path.join(outDir, "corpus_summary.csv"), "w")
     summary.write("Number of projects: %s \t Number of files: %s \n" % (proj_counter, file_counter))
     for project, file_list in proj_file_list.iteritems():
         for file in file_list:
