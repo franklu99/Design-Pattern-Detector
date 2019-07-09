@@ -106,8 +106,8 @@ if __name__ == '__main__':
    parser.add_argument('--log', '-l', 
                   action='store',
                    metavar='loglevel',
-                    default='info',
-                     choices=['debug', 'info', 
+                    default='notset',  # All
+                     choices=['notset', 'debug', 'info',
                                'warning'],
                       help='debug level')
    
@@ -120,8 +120,12 @@ if __name__ == '__main__':
        ValueError('Invalid log level %s' 
                       % options.log)
 
-   logging.basicConfig(level=numeric_level, filename='detector.log', filemode='a', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+   logging.basicConfig(level=numeric_level, filename='detector.log', filemode='a',
+                       format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
    logger = logging.getLogger(__name__)
+   streamHandler = logging.StreamHandler()
+   streamHandler.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
+   logger.addHandler(streamHandler)
 
    #verify input and output
    if not os.path.isdir(options.input):
