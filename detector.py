@@ -121,12 +121,14 @@ if __name__ == '__main__':
                    % options.log)
 
     # Set up logger
+    streamHandler = logging.StreamHandler(sys.stdout)
+    streamHandler.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
+    streamHandler.setLevel(numeric_level)
     logging.basicConfig(level=numeric_level, filename='detector.log', filemode='a',
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    logger = logging.getLogger(__name__)
-    streamHandler = logging.StreamHandler()
-    streamHandler.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
+    logger = logging.getLogger()
     logger.addHandler(streamHandler)
+
 
     # verify input and output
     if not os.path.isdir(options.input):
