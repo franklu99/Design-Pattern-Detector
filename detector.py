@@ -137,12 +137,15 @@ if __name__ == '__main__':
     logger.info('Input: %s' % options.input)
 
     check_dir(options.output)  # Checks if output folder exists: if not, creates one
-    check_dir(
-        os.path.join(options.output, "data"))  # Checks if 'data' folder exists in output folder: if not, creates one
-    check_dir(os.path.join(options.output,
-                           "features"))  # Additional line: Checks if 'data' folder exists in output folder: if not, creates one
-    feat_output = os.path.join(options.output, "features")
-    options.output = os.path.join(options.output, "data")
+
+    # All output should go to output (commented out code)
+    # check_dir(
+    #     os.path.join(options.output, "data"))  # Checks if 'data' folder exists in output folder: if not, creates one
+    # check_dir(os.path.join(options.output,
+    #                        "features"))  # Additional line: Checks if 'data' folder exists in output folder: if not, creates one
+    # feat_output = os.path.join(options.output, "features")
+    # options.output = os.path.join(options.output, "data")
+    feat_output = options.output  # avoid refactoring for now
 
     logger.info('Output: %s' % options.output)
 
