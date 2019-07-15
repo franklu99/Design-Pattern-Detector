@@ -167,7 +167,8 @@ if __name__ == '__main__':
             or "store" in options.tasks:
         # find the prospective input, output pairs
         # print("Options {}".format(options))
-        process_dirs(options)
+        # process_dirs(options)  # commented to remove redundant folders
+        pass
 
         # extract features from the input files
     if runAll \
