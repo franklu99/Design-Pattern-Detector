@@ -22,7 +22,7 @@ import logging
 import plyj.parser
 import os
 import sys
-from convert_format import *
+#from convert_format import *
 from extract_features_callgraph import *
 # from learning import run_train        # Not used at the moment, can be addressed later
 import random
@@ -166,9 +166,10 @@ if __name__ == '__main__':
                               feat_output, parser)      # Changed to options.input
 
    #format the features into liblinear format
-   if runAll or \
-         "format" in options.tasks:
-    labels, vectors = convert_format(feat_output, data)
+   # Commented by Najam
+   #if runAll or \
+   #      "format" in options.tasks:
+   # labels, vectors = convert_format(feat_output, data)
        #print labels, vectors
        #print "len", len(labels), len([x for x in labels if x == -1])
       #  run_train(vectors, labels)                     # Not being used 
