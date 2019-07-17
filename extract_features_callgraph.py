@@ -15,6 +15,7 @@ import sys, traceback
 from re import finditer
 from call_graph import *
 
+logger = logging.getLogger()
 
 # Moved this function from summarizer to stop some circular references
 def check_dir(adir):
@@ -114,8 +115,8 @@ def extract_features(inDir, outDir, parser):
                     method_feature_list += \
                         from_tree(cgraph, features_to_extract)
                 except Exception as e:
-                    print "ERROR: " + e.message
-                    print '\t- Errored path:\t' + input_file_abs       # Changed from python 3 to python 2 syntax for consistency
+                    logger.error("ERROR: " + e.message)
+                    logger.error('\t- Errored path:\t' + input_file_abs)       # Changed from python 3 to python 2 syntax for consistency
             
         #print 'Method feature list', method_feature_list
         #print "Here we go!!!???!"
@@ -131,8 +132,8 @@ def extract_features(inDir, outDir, parser):
                 try:
                     tree = parser.parse_file(output_file_abs)
                 except:
-                    print('errored path', input_file_abs)
-                    print('errored cgraph', cgraph)
+                    logger.error('errored path'+ input_file_abs)
+                    logger.error('errored cgraph'+ cgraph)
                     continue
 
                 method_names_in_summary += add_class_labels(tree, 
@@ -201,16 +202,16 @@ def add_class_labels(tree,
                           [x.split("'")[0] for x in \
                             method_string.split("MethodInvocation(name='")[1:]]
                 except Exception as e:
-                    print "ERROR: " + str(e) # added str(e) to remove TypeError
-                    print "\t- Error occured in add_class_labels function"
+                    logger.error(str(e))# added str(e) to remove TypeError
+                    logger.error("\t- Error occured in add_class_labels function")
                     continue
         # else:
     #     print "There is a stupid error"
     #     continue
     except Exception as e:
-        print sys.stderr
-        traceback.print_exc()
-        traceback.format_exc()
+        logger.error(sys.stderr)
+        # traceback.print_exc()
+        # traceback.format_exc()
     return method_names_in_summary
 
 def from_tree(cgraph, fte):
