@@ -68,7 +68,7 @@ CLASSIFIERNAME supported are
 - VOTER: Voting classifier composed of RF, SVM, ADABOOST [Gives best results]
 
 
-## Miscallenous Scripts
+## Miscallenous Scripts [currently not used]
 
 ### print_ngram_features.py
 

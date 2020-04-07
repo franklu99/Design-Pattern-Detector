@@ -162,7 +162,8 @@ def summarise_cv_results(cv_results):
     recall = np.mean(recall,axis=0)
     fscore = np.mean(fscore,axis=0)
     support = np.mean(support,axis=0).astype(int)
-    cm = np.mean(cm,axis=0).astype(int)
+    #cm = np.mean(cm,axis=0).astype(int)# mean not required
+    cm = np.sum(cm,axis=0).astype(int)
 
     return cm, accuracy, balanced_accuracy, misclassification, precision, recall, fscore, support, precision_final, recall_final, fscore_final
 

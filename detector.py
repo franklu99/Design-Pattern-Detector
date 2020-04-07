@@ -26,7 +26,7 @@ from extract_features_callgraph import *
 # from learning import run_train        # Not used at the moment, can be addressed later
 import random
 
-
+sys.setrecursionlimit(10000) # using a recursion limit to avoid crashing if the huge dataset is parsed.
 def check_patterns(options):
     '''
     Function to compare patterns with
