@@ -50,7 +50,7 @@ for root, dirs, files in os.walk(verbose_root):
             file_data_store[f]["class_properties"] = class_properties
 
             # Appends the list of ngrams (in lower case) to a list of sentences
-            for class_name, ngrams in class_dict.iteritems():
+            for class_name, ngrams in class_dict.items():
                 ngram_for_class = [ngram.lower() for ngram in ngrams]
                 sentences.append(ngram_for_class)
 
@@ -63,13 +63,13 @@ ngram_model = Word2Vec(sentences, size=NDIM, window=20, min_count=2, workers=4)
 saved_items_list = set()
 saved_items_dicts = list()
 
-for f,verbose_data in file_data_store.iteritems():
+for f,verbose_data in file_data_store.items():
     proj_name = verbose_data["project_name"]  # Name of the current project
     # Retrieve a dictionary constaining class names and corresponding ngrams
     class_dict = verbose_data["class_dict"]
     class_properties = verbose_data["class_properties"]
     # Iterate over class names and ngrams from the verbose file
-    for class_name, ngrams in class_dict.iteritems():
+    for class_name, ngrams in class_dict.items():
 
         # The if-block below makes sure that we only keep the labelled datasets in java_class_features.txt
         # This reduces size of java_class_features.txt, before this java_class_features.txt was almost 100 MB
@@ -104,25 +104,25 @@ for f,verbose_data in file_data_store.iteritems():
 
 
 # Printing Total number of examples identified from output-refined.csv
-print "Examples identified from output-refined.csv = "+str(len(saved_items_list))
+print("Examples identified from output-refined.csv = "+str(len(saved_items_list)))
 
 # Determining which examples are in output-refined.csv (Labelled) but missed in `.verbose` files.
 patterns_keys = set(patterns.keys())
-print "-"*80
-print "Examples in Output-refined.csv but not in `.verbose` files = " + str(len(patterns_keys-saved_items_list))
-print "-"*80
-print "\nMissing Project,Class,Pattern"
+print("-"*80)
+print("Examples in Output-refined.csv but not in `.verbose` files = " + str(len(patterns_keys-saved_items_list)))
+print("-"*80)
+print("\nMissing Project,Class,Pattern")
 for i,(proj,class_name) in enumerate(sorted(patterns_keys-saved_items_list)):
-    print i,",",proj,",",class_name,",",patterns[(proj,class_name)]
+    print(i,",",proj,",",class_name,",",patterns[(proj,class_name)])
 
 
-print "-"*80
-print "Missing Projects = "
-print "-"*80
+print("-"*80)
+print("Missing Projects = ")
+print("-"*80)
 
 missing_projects = set([proj for proj,class_name in sorted(patterns_keys-saved_items_list)])
 for proj in missing_projects:
-    print proj
+    print(proj)
 
 
 import pandas as pd

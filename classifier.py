@@ -30,7 +30,7 @@ else:
     algorithm = "RF"
 
 assert algorithm in ["RF","SVM","GBTREE","ADABOOST","ADABOOST_LOGISTIC","LOGISTIC","RIDGE","VOTER"]
-print "Algorithm Used = %s"%(algorithm)
+print("Algorithm Used = %s"%(algorithm))
 
 # Filename of the dataset
 data_file = "dataset.csv"

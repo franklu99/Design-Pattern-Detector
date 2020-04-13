@@ -73,7 +73,7 @@ def extract_features(inDir, outDir, parser):
     proj_counter = 0                # Counter for the number of projects
     file_counter = 0                # Counter for the number of files
     
-    proj_file_list = defaultdict(list)   # Dictionary to hold the names of files and their projects 
+    proj_file_dict = defaultdict(list)   # Dictionary to hold the names of files and their projects
     method_summaries = []                # List to hold the features extracted from each file
     
     # Iterate over all the projects in the corpus given by inDir
@@ -93,7 +93,7 @@ def extract_features(inDir, outDir, parser):
             
             for input_file in files:
                 file_counter += 1                       # Increment the file counter
-                proj_file_list[proj].append(input_file) # Store the filename
+                proj_file_dict[proj].append(input_file) # Store the filename
 
                 # Debugging:
                 # print "root {0} drs {1} input_file {2}".format(root, drs, input_file)
@@ -170,7 +170,7 @@ def extract_features(inDir, outDir, parser):
     summary.write("Number of projects, Number of files\n")
     summary.write(str(proj_counter) + ',' + str(file_counter) + '\n\n')
     summary.write("PROJECT, CLASS\n")
-    for project, file_list in proj_file_list.iteritems():
+    for project, file_list in proj_file_dict.items():
         for file in file_list:
             summary.write("%s, %s \n" %(project, file))
     summary.close()
