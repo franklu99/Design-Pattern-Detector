@@ -20,8 +20,8 @@ def get_classes(verbose_path):
     try:
         verbose = open(verbose_path, "r")
     except Exception as e:
-        print e
-        print "\t- File could not be opened\n"
+        print(e)
+        print("\t- File could not be opened\n")
 
     # Initialise a dictionary (of lists) to hold the class ngrams
     class_ngrams = defaultdict(list)
